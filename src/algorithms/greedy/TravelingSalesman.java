@@ -1,19 +1,27 @@
 package algorithms.greedy;
 
-import base.GreedyAlgorithm;
+public class TravelingSalesman {
 
-public class TravelingSalesman extends GreedyAlgorithm {
-  private long executionTime;
+  public int[] findApproximateSolution(int[][] graph) {
+    int V = graph.length;
+    int[] path = new int[V];
+    boolean[] visited = new boolean[V];
+    visited[0] = true;
+    path[0] = 0;
 
-  @Override
-  public void execute() {
-    long startTime = System.nanoTime();
-    // Implementation of Traveling Salesman Problem
-    executionTime = System.nanoTime() - startTime;
-  }
+    for (int i = 1; i < V; i++) {
+      int minVertex = -1;
+      int minValue = Integer.MAX_VALUE;
+      for (int j = 0; j < V; j++) {
+        if (!visited[j] && graph[path[i - 1]][j] < minValue) {
+          minVertex = j;
+          minValue = graph[path[i - 1]][j];
+        }
+      }
+      path[i] = minVertex;
+      visited[minVertex] = true;
+    }
 
-  @Override
-  public long getExecutionTime() {
-    return executionTime;
+    return path;
   }
 }

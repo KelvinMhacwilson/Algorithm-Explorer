@@ -1,19 +1,33 @@
 package algorithms.greedy;
 
-import base.GreedyAlgorithm;
+import utils.Graph;
 
-public class DijkstraShortestPath extends GreedyAlgorithm {
-  private long executionTime;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
-  @Override
-  public void execute() {
-    long startTime = System.nanoTime();
-    // Implementation of Dijkstra's Shortest Path
-    executionTime = System.nanoTime() - startTime;
-  }
+public class DijkstraShortestPath {
 
-  @Override
-  public long getExecutionTime() {
-    return executionTime;
+  public int[] shortestPath(Graph graph, int source) {
+    int V = graph.getVertices();
+    int[] dist = new int[V];
+    Arrays.fill(dist, Integer.MAX_VALUE);
+    dist[source] = 0;
+
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    pq.offer(source);
+
+    while (!pq.isEmpty()) {
+      int u = pq.poll();
+      for (Graph.Edge edge : graph.getAdjacencyList(u)) {
+        int v = edge.destination;
+        int weight = edge.weight;
+        if (dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]) {
+          dist[v] = dist[u] + weight;
+          pq.offer(v);
+        }
+      }
+    }
+
+    return dist;
   }
 }
