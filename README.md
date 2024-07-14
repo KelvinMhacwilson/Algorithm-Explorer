@@ -1,6 +1,6 @@
-# AlgorithmTester
+# Algorithm Explorer
 
-The `AlgorithmTester` is a console-based Java application designed to allow users to interactively test a variety of classic algorithms. These algorithms include both Divide and Conquer and Greedy algorithms, covering fundamental problems in computer science such as sorting, graph traversal, shortest path, and more.
+The `Algorithm Explorer` is a console-based Java application designed to allow users to interactively test a variety of classic algorithms. These algorithms include both Divide and Conquer and Greedy algorithms, covering fundamental problems in computer science such as sorting, graph traversal, shortest path, and more.
 
 ## Algorithms Implemented
 
@@ -31,11 +31,11 @@ The `AlgorithmTester` is a console-based Java application designed to allow user
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/KelvinMhacwilson/Divide-and-Conquer-and-Greedy-Algorithms.git
+   git clone https://github.com/KelvinMhacwilson/Algorithm-Explorer.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd algorithm-tester
+   cd Algorithm-Explorer
    ```
 
 ### Running the Application
