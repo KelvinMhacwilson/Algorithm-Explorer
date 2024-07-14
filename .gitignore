@@ -15,7 +15,6 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
-Report.docx
 
 ### NetBeans ###
 /nbproject/private/
