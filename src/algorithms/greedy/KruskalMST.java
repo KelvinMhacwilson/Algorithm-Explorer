@@ -1,7 +1,6 @@
 package algorithms.greedy;
 
 import utils.Graph;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

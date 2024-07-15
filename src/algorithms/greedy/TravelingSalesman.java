@@ -4,7 +4,7 @@ public class TravelingSalesman {
 
   public int[] findApproximateSolution(int[][] graph) {
     int V = graph.length;
-    int[] path = new int[V];
+    int[] path = new int[V + 1];
     boolean[] visited = new boolean[V];
     visited[0] = true;
     path[0] = 0;
@@ -21,6 +21,9 @@ public class TravelingSalesman {
       path[i] = minVertex;
       visited[minVertex] = true;
     }
+
+    // Return to the starting point
+    path[V] = 0;
 
     return path;
   }

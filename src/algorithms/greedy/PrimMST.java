@@ -1,48 +1,48 @@
 package algorithms.greedy;
 
-import utils.Graph;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 
 public class PrimMST {
 
-  public List<Graph.Edge> findMST(Graph graph) {
-    int V = graph.getVertices();
-    List<Graph.Edge> mst = new ArrayList<>();
-    boolean[] visited = new boolean[V];
-    PriorityQueue<Graph.Edge> pq = new PriorityQueue<>();
+  public void findMST(int[][] graph, int V) {
+    int[] parent = new int[V];
+    int[] key = new int[V];
+    boolean[] mstSet = new boolean[V];
 
-    visit(0, graph, visited, pq);
+    Arrays.fill(key, Integer.MAX_VALUE);
+    key[0] = 0;
+    parent[0] = -1;
 
-    while (!pq.isEmpty() && mst.size() < V - 1) {
-      Graph.Edge edge = pq.poll();
-      int u = edge.destination;
-      int v = edge.source;
+    for (int count = 0; count < V - 1; count++) {
+      int u = minKey(key, mstSet, V);
+      mstSet[u] = true;
 
-      if (visited[u] && visited[v]) {
-        continue;
-      }
-
-      mst.add(edge);
-      if (!visited[u]) {
-        visit(u, graph, visited, pq);
-      }
-      if (!visited[v]) {
-        visit(v, graph, visited, pq);
+      for (int v = 0; v < V; v++) {
+        if (graph[u][v] != 0 && !mstSet[v] && graph[u][v] < key[v]) {
+          parent[v] = u;
+          key[v] = graph[u][v];
+        }
       }
     }
 
-    return mst;
+    printMST(parent, graph, V);
   }
 
-  private void visit(int vertex, Graph graph, boolean[] visited, PriorityQueue<Graph.Edge> pq) {
-    visited[vertex] = true;
-    for (Graph.Edge edge : graph.getAdjacencyList(vertex)) {
-      if (!visited[edge.destination]) {
-        pq.offer(edge);
+  private int minKey(int[] key, boolean[] mstSet, int V) {
+    int min = Integer.MAX_VALUE, minIndex = -1;
+    for (int v = 0; v < V; v++) {
+      if (!mstSet[v] && key[v] < min) {
+        min = key[v];
+        minIndex = v;
       }
+    }
+    return minIndex;
+  }
+
+  private void printMST(int[] parent, int[][] graph, int V) {
+    System.out.println("Edge \tWeight");
+    for (int i = 1; i < V; i++) {
+      System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]);
     }
   }
 }
